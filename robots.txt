@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://neelesh-465.github.io/sarvottam-dairy/sitemap.xml
