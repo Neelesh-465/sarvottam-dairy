@@ -19,106 +19,357 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
   html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', sans-serif; background: transparent; color: var(--soil); overflow-x: hidden; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: transparent;
+    color: var(--soil);
+    overflow-x: hidden;
+  }
+
   h1, h2, h3 { font-family: 'Fraunces', serif; }
 
-  .village-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  .village-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
   .village-bg svg { width: 100%; height: 100%; }
 
   .bg-veil {
-    position: fixed; inset: 0; z-index: 1; pointer-events: none;
-    background: linear-gradient(to bottom, rgba(246,241,228,0.1) 0%, rgba(246,241,228,0.3) 22%, rgba(246,241,228,0.65) 45%, rgba(246,241,228,0.8) 100%);
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(to bottom,
+      rgba(246,241,228,0.1) 0%,
+      rgba(246,241,228,0.3) 22%,
+      rgba(246,241,228,0.65) 45%,
+      rgba(246,241,228,0.8) 100%);
   }
 
-  .leaf-field { position: fixed; inset: 0; pointer-events: none; z-index: 2; overflow: hidden; }
-  .leaf { position: absolute; width: 14px; height: 20px; background: var(--moss); border-radius: 0 100% 0 100%; opacity: 0.25; animation: drift linear infinite; }
-  @keyframes drift { from { transform: translateY(-10vh) translateX(0) rotate(0deg); } to { transform: translateY(110vh) translateX(40px) rotate(360deg); } }
+  /* ---------- Floating leaf particles ---------- */
+  .leaf-field {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    overflow: hidden;
+  }
+  .leaf {
+    position: absolute;
+    width: 14px;
+    height: 20px;
+    background: var(--moss);
+    border-radius: 0 100% 0 100%;
+    opacity: 0.25;
+    animation: drift linear infinite;
+  }
+  @keyframes drift {
+    from { transform: translateY(-10vh) translateX(0) rotate(0deg); }
+    to   { transform: translateY(110vh) translateX(40px) rotate(360deg); }
+  }
 
+  /* ---------- Nav ---------- */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 24px 60px;
     background: linear-gradient(to bottom, rgba(246,241,228,0.95), transparent);
   }
-  .logo { font-family: 'Fraunces', serif; font-weight: 600; font-size: 22px; color: var(--soil); letter-spacing: 0.5px; }
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--soil);
+    letter-spacing: 0.5px;
+  }
   .logo span { color: var(--gold); }
   nav ul { list-style: none; display: flex; gap: 36px; }
   nav a { color: var(--soil); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.3px; }
   nav a:hover { color: var(--gold); }
 
+  /* ---------- Hero with 3D rotating jar ---------- */
   .hero {
-    position: relative; min-height: 100vh; display: flex; align-items: center;
-    justify-content: space-between; padding: 0 60px; z-index: 3;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+    z-index: 3;
   }
   .hero-text { max-width: 480px; }
-  .eyebrow { color: var(--gold); font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 18px; display: block; }
-  .hero h1 { font-size: clamp(38px, 5vw, 58px); font-weight: 600; line-height: 1.08; color: var(--soil); margin-bottom: 22px; }
+  .eyebrow {
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: block;
+  }
+  .hero h1 {
+    font-size: clamp(38px, 5vw, 58px);
+    font-weight: 600;
+    line-height: 1.08;
+    color: var(--soil);
+    margin-bottom: 22px;
+  }
   .hero h1 em { color: var(--green); font-style: normal; }
-  .hero p { font-size: 17px; line-height: 1.7; color: var(--soil-light); margin-bottom: 32px; }
+  .hero p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--soil-light);
+    margin-bottom: 32px;
+  }
   .cta-row { display: flex; gap: 16px; }
-  .btn { padding: 14px 28px; border-radius: 4px; font-size: 14px; font-weight: 600; text-decoration: none; letter-spacing: 0.3px; transition: transform 0.25s ease, box-shadow 0.25s ease; display: inline-block; }
+  .btn {
+    padding: 14px 28px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: inline-block;
+  }
   .btn-primary { background: var(--green); color: var(--cream); }
   .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(47,82,51,0.35); }
   .btn-outline { border: 1.5px solid var(--soil); color: var(--soil); }
   .btn-outline:hover { background: var(--soil); color: var(--cream); }
 
-  .jar-stage { perspective: 1200px; width: 380px; height: 480px; display: flex; align-items: center; justify-content: center; }
-  .jar { position: relative; width: 220px; height: 300px; transform-style: preserve-3d; transform: rotateY(-25deg) rotateX(8deg); transition: transform 0.1s ease-out; cursor: grab; }
+  .hint {
+    font-size: 12px;
+    color: var(--soil-light);
+    margin-top: 14px;
+    opacity: 0.7;
+    letter-spacing: 0.3px;
+  }
+
+  /* 3D Jar */
+  .jar-stage {
+    perspective: 1200px;
+    width: 380px;
+    height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .jar {
+    position: relative;
+    width: 220px;
+    height: 300px;
+    transform-style: preserve-3d;
+    transform: rotateY(-25deg) rotateX(8deg);
+    transition: transform 0.1s ease-out;
+    cursor: grab;
+  }
   .jar:active { cursor: grabbing; }
-  .jar-face { position: absolute; inset: 0; border-radius: 30px 30px 50px 50px; background: linear-gradient(135deg, var(--milk), var(--cream-deep)); box-shadow: inset 0 0 0 2px rgba(61,43,31,0.08); }
-  .jar-band { position: absolute; left: 0; right: 0; height: 16%; background: var(--gold); opacity: 0.9; }
+
+  .jar-face {
+    position: absolute;
+    inset: 0;
+    border-radius: 30px 30px 50px 50px;
+    background: linear-gradient(135deg, var(--milk), var(--cream-deep));
+    box-shadow: inset 0 0 0 2px rgba(61,43,31,0.08);
+  }
+  .jar-band {
+    position: absolute;
+    left: 0; right: 0;
+    height: 16%;
+    background: var(--gold);
+    opacity: 0.9;
+  }
   .band-1 { top: 12%; transform: translateZ(2px); }
   .band-2 { top: 78%; height: 10%; background: var(--green); transform: translateZ(2px); }
-  .jar-label { position: absolute; top: 42%; left: 50%; transform: translate(-50%, -50%) translateZ(6px); background: var(--soil); color: var(--milk); padding: 14px 18px; border-radius: 6px; font-family: 'Fraunces', serif; font-weight: 600; font-size: 15px; text-align: center; line-height: 1.3; width: 130px; box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
-  .jar-label small { display: block; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 10px; color: var(--gold); letter-spacing: 1.5px; margin-bottom: 4px; }
-  .jar-lid { position: absolute; top: -18px; left: 10%; width: 80%; height: 34px; background: var(--green); border-radius: 50% 50% 20% 20% / 60% 60% 20% 20%; transform: translateZ(4px); }
-  .jar-shadow { position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); width: 200px; height: 30px; background: radial-gradient(ellipse, rgba(61,43,31,0.35), transparent 70%); filter: blur(4px); }
 
+  .jar-label {
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateZ(6px);
+    background: var(--soil);
+    color: var(--milk);
+    padding: 14px 18px;
+    border-radius: 6px;
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: center;
+    line-height: 1.3;
+    width: 130px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  }
+  .jar-label small {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+  }
+
+  .jar-lid {
+    position: absolute;
+    top: -18px; left: 10%;
+    width: 80%; height: 34px;
+    background: var(--green);
+    border-radius: 50% 50% 20% 20% / 60% 60% 20% 20%;
+    transform: translateZ(4px);
+  }
+
+  .jar-shadow {
+    position: absolute;
+    bottom: -30px; left: 50%;
+    transform: translateX(-50%);
+    width: 200px; height: 30px;
+    background: radial-gradient(ellipse, rgba(61,43,31,0.35), transparent 70%);
+    filter: blur(4px);
+  }
+
+  /* ---------- Section shared ---------- */
   section { position: relative; z-index: 3; padding: 110px 60px; scroll-margin-top: 90px; }
   .section-head { text-align: center; max-width: 620px; margin: 0 auto 60px; }
   .section-head .eyebrow { text-align: center; }
   .section-head h2 { font-size: 36px; font-weight: 600; margin-bottom: 14px; }
   .section-head p { color: var(--soil-light); font-size: 16px; line-height: 1.6; }
 
-  .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 32px; max-width: 1100px; margin: 0 auto; perspective: 1000px; }
+  /* ---------- Products with 3D tilt ---------- */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+    perspective: 1000px;
+  }
   .product-card {
-    background: white; border-radius: 12px; padding: 34px 28px; box-shadow: 0 10px 30px rgba(61,43,31,0.08);
+    background: white;
+    border-radius: 12px;
+    padding: 34px 28px;
+    box-shadow: 0 10px 30px rgba(61,43,31,0.08);
     transition: transform 0.6s cubic-bezier(0.22,1,0.36,1), box-shadow 0.15s ease, opacity 0.7s cubic-bezier(0.22,1,0.36,1);
-    transform-style: preserve-3d; border: 1px solid rgba(61,43,31,0.06); opacity: 0;
+    transform-style: preserve-3d;
+    border: 1px solid rgba(61,43,31,0.06);
+    opacity: 0;
   }
   .product-card.assemble-left { transform: translateX(-90px) translateY(30px) rotateY(-35deg) rotateZ(-4deg); }
   .product-card.assemble-right { transform: translateX(90px) translateY(30px) rotateY(35deg) rotateZ(4deg); }
   .product-card.assemble-up { transform: translateY(-80px) rotateX(30deg) scale(0.85); }
-  .product-card.visible { opacity: 1; transform: translateX(0) translateY(0) rotateX(0) rotateY(0) rotateZ(0) scale(1); }
-  .product-card.settled { transition: transform 0.15s ease, box-shadow 0.15s ease; }
-  .product-card:hover { box-shadow: 0 25px 50px rgba(61,43,31,0.18); }
-  .product-icon { width: 56px; height: 56px; border-radius: 50%; background: var(--cream); display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 20px; transform: translateZ(20px); }
+  .product-card.visible {
+    opacity: 1;
+    transform: translateX(0) translateY(0) rotateX(0) rotateY(0) rotateZ(0) scale(1);
+  }
+  .product-card.settled {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .product-card:hover {
+    box-shadow: 0 25px 50px rgba(61,43,31,0.18);
+  }
+  .product-icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+    transform: translateZ(20px);
+  }
   .product-card h3 { font-size: 20px; margin-bottom: 10px; transform: translateZ(15px); }
   .product-card p { font-size: 14px; color: var(--soil-light); line-height: 1.6; margin-bottom: 18px; transform: translateZ(10px); }
-  .product-price { font-weight: 600; color: var(--gold); font-size: 16px; transform: translateZ(15px); display: block; }
+  .product-price {
+    font-weight: 600; color: var(--gold); font-size: 16px;
+    transform: translateZ(15px);
+    display: block;
+  }
 
-  .why { background: var(--green); color: var(--cream); border-radius: 24px; margin: 0 40px; padding: 90px 60px; }
+  /* ---------- Why choose us ---------- */
+  .why {
+    background: var(--green);
+    color: var(--cream);
+    border-radius: 24px;
+    margin: 0 40px;
+    padding: 90px 60px;
+  }
   .why .section-head p { color: rgba(246,241,228,0.75); }
   .why .eyebrow { color: var(--gold); }
-  .reasons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto 60px; }
-  .reason-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 30px 24px; text-align: left; opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease, background 0.2s ease; }
+
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto 60px;
+  }
+  .reason-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 30px 24px;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease, background 0.2s ease;
+  }
   .reason-card:hover { background: rgba(255,255,255,0.1); }
   .reason-card.visible { opacity: 1; transform: translateY(0); }
-  .reason-icon { width: 46px; height: 46px; border-radius: 50%; background: rgba(201,151,31,0.18); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+  .reason-icon {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: rgba(201,151,31,0.18);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
   .reason-card h3 { font-size: 17px; margin-bottom: 8px; color: var(--cream); }
   .reason-card p { font-size: 13.5px; line-height: 1.6; color: rgba(246,241,228,0.7); }
-  .stats-row { display: flex; justify-content: center; gap: 80px; flex-wrap: wrap; margin-top: 50px; padding-top: 46px; border-top: 1px solid rgba(255,255,255,0.15); }
+
+  .stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    padding-top: 46px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
   .stat { text-align: center; }
   .stat .num { font-family: 'Fraunces', serif; font-size: 44px; font-weight: 600; color: var(--gold); }
   .stat .label { font-size: 13px; letter-spacing: 1px; text-transform: uppercase; opacity: 0.8; margin-top: 6px; }
 
-  .contact { text-align: center; max-width: 560px; margin: 0 auto; }
-  .contact-box { background: white; border-radius: 16px; padding: 50px 40px; box-shadow: 0 15px 40px rgba(61,43,31,0.1); margin-top: 30px; }
+  /* ---------- Contact ---------- */
+  .contact {
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .contact-box {
+    background: white;
+    border-radius: 16px;
+    padding: 50px 40px;
+    box-shadow: 0 15px 40px rgba(61,43,31,0.1);
+    margin-top: 30px;
+  }
   .contact-item { margin-bottom: 16px; font-size: 15px; }
   .contact-item strong { color: var(--green); }
 
-  footer { text-align: center; padding: 40px; color: var(--soil-light); font-size: 13px; position: relative; z-index: 3; }
+  footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--soil-light);
+    font-size: 13px;
+    position: relative;
+    z-index: 3;
+  }
 
   @media (max-width: 900px) {
     .hero { flex-direction: column; padding-top: 140px; gap: 40px; text-align: center; }
@@ -129,9 +380,38 @@
     section { padding: 70px 24px; }
     .why { margin: 0 16px; padding: 60px 30px; }
   }
+
+  /* ---------- WhatsApp floating button ---------- */
+  .whatsapp-btn {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 200;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(37,211,102,0.45);
+    text-decoration: none;
+    animation: pulse-wa 2.5s ease-in-out infinite;
+  }
+  .whatsapp-btn svg { width: 30px; height: 30px; }
+  .whatsapp-btn:hover { transform: scale(1.08); }
+  @keyframes pulse-wa {
+    0%, 100% { box-shadow: 0 8px 24px rgba(37,211,102,0.45); }
+    50% { box-shadow: 0 8px 24px rgba(37,211,102,0.75), 0 0 0 8px rgba(37,211,102,0.15); }
+  }
+  @media (max-width: 900px) {
+    .whatsapp-btn { bottom: 20px; right: 20px; width: 54px; height: 54px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .leaf { animation: none; }
     .jar { transition: none; }
+    .whatsapp-btn { animation: none; }
   }
 </style>
 </head>
@@ -140,30 +420,55 @@
   <div class="village-bg" id="villageBg">
     <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#EFE3C5"/><stop offset="100%" stop-color="#F6F1E4"/></linearGradient>
-        <linearGradient id="hillFar" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9BB08C"/><stop offset="100%" stop-color="#7C9473"/></linearGradient>
-        <linearGradient id="hillNear" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4F7A4A"/><stop offset="100%" stop-color="#2F5233"/></linearGradient>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#EFE3C5"/>
+          <stop offset="100%" stop-color="#F6F1E4"/>
+        </linearGradient>
+        <linearGradient id="hillFar" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#9BB08C"/>
+          <stop offset="100%" stop-color="#7C9473"/>
+        </linearGradient>
+        <linearGradient id="hillNear" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#4F7A4A"/>
+          <stop offset="100%" stop-color="#2F5233"/>
+        </linearGradient>
       </defs>
       <rect width="1600" height="900" fill="url(#sky)"/>
       <circle cx="1350" cy="140" r="70" fill="#C9971F" opacity="0.35"/>
+      <!-- Far hills -->
       <path d="M0,380 Q200,300 420,360 T860,340 T1300,370 T1600,350 L1600,900 L0,900 Z" fill="url(#hillFar)" opacity="0.5"/>
+      <!-- Mid hills -->
       <path d="M0,480 Q250,400 520,460 T1000,430 T1600,470 L1600,900 L0,900 Z" fill="url(#hillFar)" opacity="0.7"/>
+      <!-- Near hills / fields -->
       <path d="M0,580 Q300,500 650,560 T1250,530 T1600,570 L1600,900 L0,900 Z" fill="url(#hillNear)" opacity="0.8"/>
+      <!-- Grass ground -->
       <path d="M0,700 Q400,650 800,690 T1600,680 L1600,900 L0,900 Z" fill="#2F5233"/>
+      <!-- Tree line -->
       <g opacity="0.85">
-        <circle cx="120" cy="560" r="24" fill="#2F5233"/><circle cx="165" cy="572" r="18" fill="#2F5233"/>
-        <circle cx="320" cy="540" r="20" fill="#3D6B3A"/><circle cx="480" cy="555" r="26" fill="#2F5233"/>
-        <circle cx="530" cy="570" r="16" fill="#3D6B3A"/><circle cx="700" cy="530" r="28" fill="#2F5233"/>
-        <circle cx="750" cy="548" r="18" fill="#3D6B3A"/><circle cx="900" cy="555" r="22" fill="#2F5233"/>
-        <circle cx="1080" cy="535" r="26" fill="#3D6B3A"/><circle cx="1130" cy="552" r="16" fill="#2F5233"/>
-        <circle cx="1300" cy="545" r="24" fill="#2F5233"/><circle cx="1440" cy="530" r="28" fill="#3D6B3A"/>
+        <circle cx="120" cy="560" r="24" fill="#2F5233"/>
+        <circle cx="165" cy="572" r="18" fill="#2F5233"/>
+        <circle cx="320" cy="540" r="20" fill="#3D6B3A"/>
+        <circle cx="480" cy="555" r="26" fill="#2F5233"/>
+        <circle cx="530" cy="570" r="16" fill="#3D6B3A"/>
+        <circle cx="700" cy="530" r="28" fill="#2F5233"/>
+        <circle cx="750" cy="548" r="18" fill="#3D6B3A"/>
+        <circle cx="900" cy="555" r="22" fill="#2F5233"/>
+        <circle cx="1080" cy="535" r="26" fill="#3D6B3A"/>
+        <circle cx="1130" cy="552" r="16" fill="#2F5233"/>
+        <circle cx="1300" cy="545" r="24" fill="#2F5233"/>
+        <circle cx="1440" cy="530" r="28" fill="#3D6B3A"/>
         <circle cx="1490" cy="548" r="18" fill="#2F5233"/>
       </g>
+      <!-- Grass tufts -->
       <g opacity="0.6" stroke="#1F3D22" stroke-width="3" stroke-linecap="round">
-        <path d="M60,760 Q65,740 70,760"/><path d="M200,780 Q205,758 210,780"/>
-        <path d="M380,770 Q385,748 390,770"/><path d="M560,790 Q565,768 570,790"/>
-        <path d="M780,775 Q785,753 790,775"/><path d="M960,785 Q965,763 970,785"/>
-        <path d="M1150,770 Q1155,748 1160,770"/><path d="M1350,785 Q1355,763 1360,785"/>
+        <path d="M60,760 Q65,740 70,760"/>
+        <path d="M200,780 Q205,758 210,780"/>
+        <path d="M380,770 Q385,748 390,770"/>
+        <path d="M560,790 Q565,768 570,790"/>
+        <path d="M780,775 Q785,753 790,775"/>
+        <path d="M960,785 Q965,763 970,785"/>
+        <path d="M1150,770 Q1155,748 1160,770"/>
+        <path d="M1350,785 Q1355,763 1360,785"/>
         <path d="M1520,775 Q1525,753 1530,775"/>
       </g>
     </svg>
@@ -190,6 +495,7 @@
         <a href="#contact" class="btn btn-outline">Get in Touch</a>
       </div>
     </div>
+
     <div class="jar-stage">
       <div class="jar" id="jar">
         <div class="jar-shadow"></div>
@@ -249,6 +555,7 @@
         <h2>Trusted by families who taste the difference</h2>
         <p>Milked, churned, and packed the traditional way — because that's still the best way.</p>
       </div>
+
       <div class="reasons-grid">
         <div class="reason-card">
           <div class="reason-icon">🐄</div>
@@ -271,6 +578,7 @@
           <p>We're not a faceless brand — come see where your milk actually comes from.</p>
         </div>
       </div>
+
       <div class="stats-row">
         <div class="stat"><div class="num">100%</div><div class="label">Pure & Unadulterated</div></div>
         <div class="stat"><div class="num">1000+</div><div class="label">Families Served</div></div>
@@ -284,7 +592,7 @@
       <span class="eyebrow">Get In Touch</span>
       <h2>Bring the farm to your kitchen</h2>
       <div class="contact-box">
-        <div class="contact-item"><strong>Phone / WhatsApp:</strong> +91-9301479014, +91-8989444104</div>
+        <div class="contact-item"><strong>Phone / WhatsApp:</strong> <a href="https://wa.me/919301479014" target="_blank" style="color:var(--green); font-weight:600;">+91-9301479014</a>, <a href="https://wa.me/918989444104" target="_blank" style="color:var(--green); font-weight:600;">+91-8989444104</a></div>
         <div class="contact-item"><strong>Email:</strong> sarvouttamorganics@gmail.com</div>
         <div class="contact-item"><strong>Location:</strong> Sujanpura, Tehsil Jaora, Dist. Ratlam, MP – 457336</div>
         <div class="contact-item"><strong>Instagram:</strong> @sarvouttam_organic_1</div>
@@ -296,7 +604,12 @@
     © 2026 Sarvottam Dairy Farm. Sample site — replace text/contact details before publishing.
   </footer>
 
+  <a href="https://wa.me/919301479014?text=Hi%2C%20I%27m%20interested%20in%20your%20organic%20products" target="_blank" class="whatsapp-btn" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.198.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.05 21.785h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.511-5.26c.003-5.45 4.436-9.881 9.892-9.881 2.643 0 5.126 1.03 6.994 2.9a9.822 9.822 0 012.893 6.994c-.002 5.45-4.435 9.879-9.894 9.879zm8.413-18.297A11.815 11.815 0 0012.05.194C5.495.194.14 5.55.137 12.107a11.86 11.86 0 001.591 5.945L.057 23.807l5.905-1.549a11.87 11.87 0 005.984 1.535h.005c6.554 0 11.909-5.357 11.912-11.913a11.847 11.847 0 00-3.4-8.392z"/></svg>
+  </a>
+
 <script>
+  // Smooth scroll for nav/CTA links (reliable across all browsers)
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
       const target = document.querySelector(link.getAttribute('href'));
@@ -307,6 +620,7 @@
     });
   });
 
+  // Floating leaves
   const field = document.getElementById('leafField');
   for (let i = 0; i < 34; i++) {
     const leaf = document.createElement('div');
@@ -318,6 +632,7 @@
     field.appendChild(leaf);
   }
 
+  // 3D jar follows mouse
   const jar = document.getElementById('jar');
   const stage = document.querySelector('.jar-stage');
   stage.addEventListener('mousemove', (e) => {
@@ -330,8 +645,9 @@
     jar.style.transform = `rotateY(-25deg) rotateX(8deg)`;
   });
 
+  // Product cards assemble into place on scroll
   const cardObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
+    entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
         const card = entry.target;
         const delay = Array.from(card.parentNode.children).indexOf(card) * 120;
@@ -345,6 +661,7 @@
   }, { threshold: 0.2 });
   document.querySelectorAll('.product-card').forEach(card => cardObserver.observe(card));
 
+  // Why-us reason cards reveal
   const reasonObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
